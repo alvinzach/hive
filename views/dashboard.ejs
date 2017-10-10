@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hive . Get heard</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link href="<%= req.baseUrl%>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="dashboard" ng-app="hive" ng-controller="dashboardcontroller">
+    <div class="container-fluid" style="padding:0px;height:100%;" data-ng-init="init('<%= id%>')">
+        <% include partials/menu.ejs %>
+        <div class="top" style="text-align:center;padding-top:50px;padding-bottom: 50px; ">
+            <div class="container">
+                <div class="col-md-3 center">
+                    <span><img src="uploads/default.gif" class="round" style="max-width:100%"/></span>
+                </div>
+                <div class="col-md-9">
+
+                    <div class="col-md-4 col-xs-6 center">
+
+                        <div class="white" style="border-right:1px solid #fff;"><h1>{{followers}}</h1><br> followers</div>
+                    </div>
+                    <div class="col-md-4 col-xs-6 center">
+                        <div class="white"  style="border-right:1px solid #fff;"><h1>{{following}}</h1><br>following</div>
+
+                    </div>
+                    <div class="col-md-4 col-xs-6 center">
+                        <div class="white" ><h1>{{campaigns}}</h1><br>buzzz</div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="white" ><button class="btn btn-default register" data-toggle="modal" data-target="#myModal" style="font-size:20px;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;Start a buzz</button></a></div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        <div class="container" data-ng-init="">
+
+        </div>
+    </div>
+    <% include partials/buzz.ejs %>
+
+    <script src="js/jquery.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="route/release/angular-ui-router.js"></script>
+    <script src="dash/app.js"></script>
+</body>
+</html>

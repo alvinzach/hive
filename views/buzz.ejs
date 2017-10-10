@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hive . Get heard</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link href="<%= req.baseUrl%>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="dashboard" ng-app="hive" ng-controller="buzzcontroller" style="overflow-x:hidden">
+<div class="container-fluid" style="padding:0px;height:100%;" data-ng-init="init('<%= id%>')">
+    <% if(id!='stranger'){%>
+    <% include partials/menu.ejs %>
+    <% }%>
+    <div class="col-md-4" style="background:#fff;height:100%;border-right:1px solid #eaeaea;" data-ng-init="getdetails('<%= req.params.buzz_id%>')">
+    <div style="padding-left:30px;">
+        <h1>{{title}}</h1>
+    <div class="description">
+        {{description}}
+    </div>
+    </div>
+        <div style="border-top:1px solid #eaeaea;margin-top:15px;padding:30px;font-size:18px;">
+            <span><i class="fa fa-thumbs-up fa-lg" style="color:#FFB218"></i> {{fors}}</span>&nbsp;&nbsp;
+            <span><i class="fa fa-thumbs-down fa-lg" style="color:#FFB218"></i> {{against}}</span>
+        </div>
+    </div>
+    <div class="col-md-8" style="height:100%;padding:0px;">
+        <ul class="comment-list" id="comments" style="padding:0px;">
+            <li ng-repeat="comment in comments">
+
+                <div class="comment" style="border-left:5px solid #478067;" ng-if="comment.stand==true">
+                  {{comment.comment}}
+                </div>
+                <div class="comment" style="border-left:5px solid #ff7248;" ng-if="comment.stand==false">
+                    {{comment.comment}}
+                </div>
+
+            </li>
+
+        </ul>
+        <div class="comment-box" style="padding:15px;padding-top:50px;text-align:center" ng-show="stranger" >
+            Please log in to comment .
+        </div>
+        <div class="comment-box" style="padding:15px;" ng-show="user">
+            <form ng-submit="postcomment('<%= req.params.buzz_id%>')">
+            <textarea id="m" class="form-control" style="margin-bottom:10px;" ng-model="buzzit.comment"></textarea>
+
+                <label class="radio-inline"><input type="radio" value="true" id="r1" name="optradio" required ng-model="buzzit.opinion">I support this campaign</label>
+                <label class="radio-inline"><input type="radio" value="false" id="r2" name="optradio" required ng-model="buzzit.opinion">I dont support this campaign</label>
+            <button type="submit" class="btn btn-warning">submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/jquery.js"></script>
+
+<script src="../js/bootstrap.min.js"></script>
+
+<script src="../js/jquery.easing.min.js"></script>
+<script src="../angular/angular.js"></script>
+<script src="../route/release/angular-ui-router.js"></script>
+<script src="../buzz/app.js"></script>
+<script src="../socket/socket.io.js"></script>
+<script>
+    $(function () {
+    var socket = io();
+    $('form').submit(function(){
+        var stand;
+        if (document.getElementById('r1').checked) {
+            stand=true;
+        }
+        if (document.getElementById('r2').checked) {
+            stand=false;
+        }
+
+        var comment=$('#m').val();
+        var update={
+            stand:stand,
+            comment:comment
+             }
+        socket.emit('new buzz', update);
+        $('#m').val('');
+        return false;
+    });
+        socket.on('new buzz', function(msg){
+            if(msg.stand) {
+                $('#comments').append($('<li class="positive">').text(msg.comment));
+                angular.fors=angular.fors+1
+            }
+            else {
+                $('#comments').append($('<li class="negative">').text(msg.comment));
+                angular.against=angular.against+1;
+
+            }
+            var element = document.getElementById("comments");
+            element.scrollTop = element.scrollHeight;
+        });
+    });
+</script>
+</body>
+</html>

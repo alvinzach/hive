@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hive - Get heard </title>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+<body ng-app="hive">
+    <div class="top">
+        <div class="container">
+
+            <div class="col-md-7" style="padding-top:10%;padding-bottom:10%;">
+                  <h1>
+                     Hive.<br> Get Heard<br>
+                  </h1>
+                <a ui-sref="register"><button class="btn btn-default register" style="font-size:20px;">Register Now</button></a>
+            </div>
+            <div class="col-md-5 signin" style="padding-top:60px;padding-bottom:80px;">
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="route/release/angular-ui-router.js"></script>
+    <script src="home/app.js"></script>
+</body>
+
+</html>

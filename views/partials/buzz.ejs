@@ -1,0 +1,41 @@
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Start a buzz.</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" ng-show="error">
+                    {{message}}
+                </div>
+                <div class="alert alert-success" ng-show="success">
+                    {{message}}
+                </div>
+                <form ng-submit="createbuzz()" class="buzzed">
+                    <input type="text" class="form-control" placeholder="Title" ng-model="buzz.title">
+                    <input type="text" class="form-control" placeholder="Handle" ng-model="buzz.handle" ng-change="handlentry()">
+                    <p style="padding-top: 5px;">buzz unique link : hive.io/{{buzz.handle}}</p>
+                    <div class="alert alert-warning" ng-show="buzzerror">
+                        {{buzzmessage}}
+                    </div>
+                    <div class="alert alert-success" ng-show="buzzsuccess">
+                        {{buzzmessage}}
+                    </div>
+                    <textarea placeholder="Enter a small description" class="form-control" ng-model="buzz.description" style="margin-bottom: 10px;"></textarea>
+                    <button type="submit" class="btn btn-warning">Submit</button> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
